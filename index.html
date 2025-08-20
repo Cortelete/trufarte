@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juh Trufados 💖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              'sans': ['Poppins', 'sans-serif'],
+              'display': ['Dancing Script', 'cursive'],
+            },
+            colors: {
+              'primary-light': '#FFD1E3',
+              'primary': '#FFB6C1',
+              'primary-dark': '#E6A4B4',
+              'secondary-light': '#F8F0E5',
+              'secondary': '#EADBC8',
+              'secondary-dark': '#DAC0A3',
+              'accent': '#F1C27B',
+              'text-light': '#6B4F4F',
+              'text-dark': '#FFF8E1',
+            },
+            keyframes: {
+              shine: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(100%)' },
+              },
+              twinkle: {
+                '0%, 100%': { opacity: '0.2' },
+                '50%': { opacity: '0.8' },
+              }
+            },
+            animation: {
+              shine: 'shine 1.5s linear infinite',
+              twinkle: 'twinkle 4s ease-in-out infinite alternate',
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #F8F0E5;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #3a2e2e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #FFD1E3, #E6A4B4);
+        border-radius: 10px;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #EADBC8, #F1C27B);
+      }
+
+      /* Starry Background */
+      .starry-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        animation: twinkle 4s ease-in-out infinite alternate;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.8.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
