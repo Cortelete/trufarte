@@ -46,12 +46,20 @@ export default function HomePage(): React.ReactNode {
 
   return (
     <div className="flex flex-col items-center justify-center max-w-lg mx-auto">
-      <img
-        src="/logo.png"
-        alt="Juh Trufados"
-        className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-white dark:border-gray-700 shadow-xl mb-4"
-      />
-      <h1 className="text-3xl sm:text-4xl font-display font-bold text-primary dark:text-accent">Juh Trufados</h1>
+      <div className="mb-4 flex flex-col items-center">
+        <img
+          src="/logo.png"
+          alt="Trufarte Logo"
+          className="w-24 h-24 object-contain"
+        />
+        <img
+          src="/profile.png"
+          alt="Foto de perfil de Juh"
+          className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-white dark:border-gray-700 shadow-xl mt-4"
+        />
+      </div>
+      <h1 className="text-4xl sm:text-5xl font-display font-bold text-primary dark:text-accent">Trufarte</h1>
+      <p className="mt-1 text-lg sm:text-xl text-gray-700 dark:text-gray-400">Juh Trufados</p>
       <p className="mt-4 text-center text-base sm:text-lg text-gray-600 dark:text-gray-300">
         “Cada bombom é um pedacinho de amor em forma de doce 💖✨”
       </p>
