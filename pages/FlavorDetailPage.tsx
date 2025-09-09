@@ -25,7 +25,7 @@ export default function FlavorDetailPage(): React.ReactNode {
     <>
       <div className="max-w-4xl mx-auto">
         <BackButton />
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden">
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-3xl overflow-hidden">
           <div className="md:flex">
             <div className="md:flex-shrink-0">
               <img className="h-64 w-full object-cover md:w-64 md:h-full" src={flavor.image} alt={flavor.name} />

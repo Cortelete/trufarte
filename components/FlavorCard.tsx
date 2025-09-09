@@ -10,7 +10,7 @@ export default function FlavorCard({ flavor }: FlavorCardProps): React.ReactNode
   return (
     <Link
       to={`/cardapio/${flavor.id}`}
-      className="group block relative overflow-hidden rounded-2xl shadow-lg bg-white dark:bg-gray-800 transform hover:-translate-y-2 transition-transform duration-300 ease-in-out"
+      className="group block relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 transform hover:-translate-y-2 transition-transform duration-300 ease-in-out"
     >
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
       <img src={flavor.image} alt={flavor.name} className="w-full h-56 sm:h-80 object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -24,9 +24,6 @@ export default function FlavorCard({ flavor }: FlavorCardProps): React.ReactNode
           Ver mais 🍫
         </div>
       </div>
-
-      {/* Hover effect */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
     </Link>
   );
 }

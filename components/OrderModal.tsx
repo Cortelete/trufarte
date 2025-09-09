@@ -32,7 +32,7 @@ export default function OrderModal({ isOpen, onClose, flavor }: OrderModalProps)
     <Modal isOpen={isOpen} onClose={onClose} title={`Adicionar ${flavor.name}`}>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="flex items-center justify-center">
-            <img src={flavor.image} alt={flavor.name} className="w-24 h-24 rounded-full object-cover border-4 border-primary-light" />
+            <img src={flavor.image} alt={flavor.name} className="w-24 h-24 rounded-full object-cover" />
         </div>
         
         <div>
