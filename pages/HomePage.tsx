@@ -43,21 +43,34 @@ const ShimmerButton: React.FC<{
 
 export default function HomePage(): React.ReactNode {
   const [isAboutModalOpen, setAboutModalOpen] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [clickSpins, setClickSpins] = useState(0);
+  const [rotation, setRotation] = useState(0);
+  const images = ['/profile.png', '/logo.png', '/moeda.png'];
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setIsFlipped(prev => !prev);
-    }, 2000); // Flips every 2 seconds
+      setRotation(prev => prev + 180); // Flips every 2 seconds
+    }, 2000);
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
   const handleInteraction = () => {
     // Adds 3 full rotations for a dynamic spinning effect on click
-    setClickSpins(prev => prev + 3);
+    setRotation(prev => prev + 360 * 3);
   };
+
+  const currentSpin = Math.floor(rotation / 180);
+  let frontImage: string, backImage: string;
+
+  // This logic determines which image should be on which face of the coin
+  // to create a seamless 3-image cycle (A -> B -> C -> A)
+  if (currentSpin % 2 === 0) { // When the front face is visible
+    frontImage = images[currentSpin % 3];
+    backImage = images[(currentSpin + 1) % 3];
+  } else { // When the back face is visible
+    backImage = images[currentSpin % 3];
+    frontImage = images[(currentSpin + 1) % 3];
+  }
 
   return (
     <div className="flex flex-col items-center justify-center max-w-lg mx-auto">
@@ -75,27 +88,27 @@ export default function HomePage(): React.ReactNode {
             className="relative w-full h-full transition-transform duration-1000 ease-out"
             style={{ 
               transformStyle: 'preserve-3d', 
-              transform: `rotateY(${clickSpins * 360 + (isFlipped ? 180 : 0)}deg)` 
+              transform: `rotateY(${rotation}deg)` 
             }}
           >
-            {/* Front Face: Profile Picture */}
-            <div className="absolute w-full h-full rounded-full overflow-hidden" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+            {/* Front Face */}
+            <div className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-secondary-light dark:bg-gray-800 border-4 border-white dark:border-gray-700 shadow-xl" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
               <img
-                src="/profile.png"
-                alt="Foto de perfil de Juh"
-                className="w-full h-full object-cover border-4 border-white dark:border-gray-700 shadow-xl"
+                src={frontImage}
+                alt="Face da moeda"
+                className={frontImage === '/profile.png' ? "w-full h-full object-cover" : "w-24 h-24 sm:w-28 sm:h-28 object-contain p-2"}
               />
             </div>
             
-            {/* Back Face: Logo */}
+            {/* Back Face */}
             <div 
               className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-secondary-light dark:bg-gray-800 border-4 border-white dark:border-gray-700 shadow-xl" 
               style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
             >
               <img
-                src="/logo.png"
-                alt="Trufarte Logo"
-                className="w-24 h-24 sm:w-28 sm:h-28 object-contain p-2"
+                src={backImage}
+                alt="Face da moeda"
+                className={backImage === '/profile.png' ? "w-full h-full object-cover" : "w-24 h-24 sm:w-28 sm:h-28 object-contain p-2"}
               />
             </div>
           </div>
