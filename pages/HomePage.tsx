@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AboutModal from '../components/AboutModal';
 import { Instagram, Menu, Mail, Info } from '../components/icons/SocialIcons';
@@ -44,6 +44,20 @@ const ShimmerButton: React.FC<{
 export default function HomePage(): React.ReactNode {
   const [isAboutModalOpen, setAboutModalOpen] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [clickSpins, setClickSpins] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIsFlipped(prev => !prev);
+    }, 2000); // Flips every 2 seconds
+
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+  }, []);
+
+  const handleInteraction = () => {
+    // Adds 3 full rotations for a dynamic spinning effect on click
+    setClickSpins(prev => prev + 3);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center max-w-lg mx-auto">
@@ -51,15 +65,18 @@ export default function HomePage(): React.ReactNode {
         <div 
           className="relative w-28 h-28 sm:w-32 sm:h-32 cursor-pointer group"
           style={{ perspective: '1200px' }}
-          onClick={() => setIsFlipped(!isFlipped)}
+          onClick={handleInteraction}
           aria-label="Clique para virar"
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsFlipped(!isFlipped) }}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleInteraction() }}
         >
           <div 
             className="relative w-full h-full transition-transform duration-1000 ease-out"
-            style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+            style={{ 
+              transformStyle: 'preserve-3d', 
+              transform: `rotateY(${clickSpins * 360 + (isFlipped ? 180 : 0)}deg)` 
+            }}
           >
             {/* Front Face: Profile Picture */}
             <div className="absolute w-full h-full rounded-full overflow-hidden" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
@@ -84,12 +101,7 @@ export default function HomePage(): React.ReactNode {
           </div>
         </div>
       </div>
-      <img
-          src="/logo.png"
-          alt="Trufarte"
-          className="w-36 mt-2 object-contain"
-      />
-      <p className="mt-1 text-lg sm:text-xl text-gray-700 dark:text-gray-400">Juh Trufados</p>
+      <p className="mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-400">Juh Trufados</p>
       <p className="mt-4 text-center text-base sm:text-lg text-gray-600 dark:text-gray-300">
         “Cada bombom é um pedacinho de amor em forma de doce 💖✨”
       </p>
