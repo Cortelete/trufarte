@@ -43,22 +43,52 @@ const ShimmerButton: React.FC<{
 
 export default function HomePage(): React.ReactNode {
   const [isAboutModalOpen, setAboutModalOpen] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   return (
     <div className="flex flex-col items-center justify-center max-w-lg mx-auto">
       <div className="mb-4 flex flex-col items-center">
-        <img
-          src="/logo.png"
-          alt="Trufarte Logo"
-          className="w-24 h-24 object-contain"
-        />
-        <img
-          src="/profile.png"
-          alt="Foto de perfil de Juh"
-          className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-white dark:border-gray-700 shadow-xl mt-4"
-        />
+        <div 
+          className="relative w-28 h-28 sm:w-32 sm:h-32 cursor-pointer group"
+          style={{ perspective: '1200px' }}
+          onClick={() => setIsFlipped(!isFlipped)}
+          aria-label="Clique para virar"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsFlipped(!isFlipped) }}
+        >
+          <div 
+            className="relative w-full h-full transition-transform duration-1000 ease-out"
+            style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+          >
+            {/* Front Face: Profile Picture */}
+            <div className="absolute w-full h-full rounded-full overflow-hidden" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+              <img
+                src="/profile.png"
+                alt="Foto de perfil de Juh"
+                className="w-full h-full object-cover border-4 border-white dark:border-gray-700 shadow-xl"
+              />
+            </div>
+            
+            {/* Back Face: Logo */}
+            <div 
+              className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-secondary-light dark:bg-gray-800 border-4 border-white dark:border-gray-700 shadow-xl" 
+              style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+            >
+              <img
+                src="/logo.png"
+                alt="Trufarte Logo"
+                className="w-24 h-24 sm:w-28 sm:h-28 object-contain p-2"
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      <h1 className="text-4xl sm:text-5xl font-display font-bold text-primary dark:text-accent">Trufarte</h1>
+      <img
+          src="/logo.png"
+          alt="Trufarte"
+          className="w-36 mt-2 object-contain"
+      />
       <p className="mt-1 text-lg sm:text-xl text-gray-700 dark:text-gray-400">Juh Trufados</p>
       <p className="mt-4 text-center text-base sm:text-lg text-gray-600 dark:text-gray-300">
         “Cada bombom é um pedacinho de amor em forma de doce 💖✨”

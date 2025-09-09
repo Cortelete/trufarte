@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { generateCustomOrderWhatsAppLink } from '../utils/whatsapp';
 import { Send } from '../components/icons/SocialIcons';
+import BackButton from '../components/BackButton';
 
 const FormInput: React.FC<{
     id: string;
@@ -87,6 +87,7 @@ export default function EncomendasPage(): React.ReactNode {
 
     return (
         <div className="max-w-2xl mx-auto">
+            <BackButton />
             <h1 className="text-4xl sm:text-5xl font-display text-center mb-4 text-primary dark:text-accent">
                 Encomendas Especiais
             </h1>
