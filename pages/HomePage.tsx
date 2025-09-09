@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AboutModal from '../components/AboutModal';
@@ -76,7 +77,7 @@ export default function HomePage(): React.ReactNode {
     <div className="flex flex-col items-center justify-center max-w-lg mx-auto">
       <div className="mb-4 flex flex-col items-center">
         <div 
-          className="relative w-28 h-28 sm:w-32 sm:h-32 cursor-pointer group"
+          className="relative w-32 h-32 sm:w-36 sm:h-36 cursor-pointer group"
           style={{ perspective: '1200px' }}
           onClick={handleInteraction}
           aria-label="Clique para virar"
@@ -96,7 +97,7 @@ export default function HomePage(): React.ReactNode {
               <img
                 src={frontImage}
                 alt="Face da moeda"
-                className={frontImage === '/profile.png' ? "w-full h-full object-cover" : "w-24 h-24 sm:w-28 sm:h-28 object-contain p-2"}
+                className={frontImage === '/profile.png' ? "w-full h-full object-cover" : "w-28 h-28 sm:w-32 sm:h-32 object-contain p-2"}
               />
             </div>
             
@@ -108,7 +109,7 @@ export default function HomePage(): React.ReactNode {
               <img
                 src={backImage}
                 alt="Face da moeda"
-                className={backImage === '/profile.png' ? "w-full h-full object-cover" : "w-24 h-24 sm:w-28 sm:h-28 object-contain p-2"}
+                className={backImage === '/profile.png' ? "w-full h-full object-cover" : "w-28 h-28 sm:w-32 sm:h-32 object-contain p-2"}
               />
             </div>
           </div>

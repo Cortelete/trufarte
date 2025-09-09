@@ -13,7 +13,7 @@ export default function Header(): React.ReactNode {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <img src="/logo.png" alt="Trufarte Logo" className="h-10 w-10 object-contain" />
+              <img src="/logo.png" alt="Trufarte Logo" className="h-12 w-12 object-contain" />
             </Link>
           </div>
           <div className="flex items-center">
