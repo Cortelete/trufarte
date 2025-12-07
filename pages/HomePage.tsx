@@ -101,7 +101,7 @@ export default function HomePage(): React.ReactNode {
               }}
             >
               {/* Front Face */}
-              <div className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-transparent" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+              <div className="absolute w-full h-full flex items-center justify-center bg-transparent" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
                 <img
                   src={frontImage}
                   alt="Face da moeda"
@@ -111,7 +111,7 @@ export default function HomePage(): React.ReactNode {
               
               {/* Back Face */}
               <div 
-                className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-transparent" 
+                className="absolute w-full h-full flex items-center justify-center bg-transparent" 
                 style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
               >
                 <img
