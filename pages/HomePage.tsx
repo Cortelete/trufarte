@@ -13,21 +13,26 @@ const ShimmerButton: React.FC<{
   disabled?: boolean;
 }> = ({ href, to, onClick, children, icon, disabled }) => {
   const commonProps = {
-    className: `group relative w-full flex items-center justify-center p-4 my-3 rounded-full text-base sm:text-lg font-semibold overflow-hidden transition-all duration-300 shadow-lg transform hover:scale-105 ${
+    className: `group relative w-full flex items-center justify-center px-6 py-4 rounded-full text-sm sm:text-base font-bold tracking-widest uppercase overflow-hidden transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
       disabled 
         ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
-        : 'bg-gradient-to-r from-primary-light to-pink-100 dark:from-primary-dark dark:to-pink-900 text-text-light dark:text-white'
+        : 'bg-white/80 dark:bg-gray-800/80 text-text-light dark:text-white border border-white/50 dark:border-gray-600 hover:bg-white dark:hover:bg-gray-700'
     }`,
     onClick: disabled ? (e: React.MouseEvent) => e.preventDefault() : onClick,
   };
 
   const content = (
     <>
-      <span className="absolute left-0 top-0 h-full w-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full transition-transform duration-700 ease-in-out group-hover:translate-x-full"></span>
-      <div className="flex items-center space-x-3">
+      {/* Shimmer Effect Background */}
+      <span className="absolute left-0 top-0 h-full w-full bg-gradient-to-r from-transparent via-primary-light/20 dark:via-white/10 to-transparent transform -translate-x-full transition-transform duration-700 ease-in-out group-hover:translate-x-full"></span>
+      
+      {/* Icon Positioned Absolute Left */}
+      <span className="absolute left-4 sm:left-6 flex items-center justify-center text-primary dark:text-accent transition-transform duration-300 group-hover:scale-110">
         {icon}
-        <span>{children}</span>
-      </div>
+      </span>
+      
+      {/* Centered Text */}
+      <span className="relative z-10 whitespace-nowrap">{children}</span>
     </>
   );
 
@@ -74,57 +79,76 @@ export default function HomePage(): React.ReactNode {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center max-w-lg mx-auto">
-      <div className="mb-4 flex flex-col items-center">
-        <div 
-          className="relative w-32 h-32 sm:w-36 sm:h-36 cursor-pointer group"
-          style={{ perspective: '1200px' }}
-          onClick={handleInteraction}
-          aria-label="Clique para virar"
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleInteraction() }}
-        >
+    <div className="flex flex-col items-center justify-center min-h-[70vh] w-full px-4">
+      <div className="w-full max-w-md bg-white/30 dark:bg-gray-900/40 backdrop-blur-xl rounded-[2.5rem] shadow-2xl p-6 sm:p-10 border border-white/40 dark:border-gray-700/40 flex flex-col items-center transition-all duration-300 relative overflow-hidden">
+        
+        {/* Profile Section */}
+        <div className="mb-6 flex flex-col items-center z-10">
           <div 
-            className="relative w-full h-full transition-transform duration-1000 ease-out"
-            style={{ 
-              transformStyle: 'preserve-3d', 
-              transform: `rotateY(${rotation}deg)` 
-            }}
+            className="relative w-32 h-32 sm:w-40 sm:h-40 cursor-pointer group"
+            style={{ perspective: '1200px' }}
+            onClick={handleInteraction}
+            aria-label="Clique para virar"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleInteraction() }}
           >
-            {/* Front Face */}
-            <div className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-              <img
-                src={frontImage}
-                alt="Face da moeda"
-                className={frontImage === '/profile.png' ? "w-full h-full object-cover" : "w-28 h-28 sm:w-32 sm:h-32 object-contain p-2"}
-              />
-            </div>
-            
-            {/* Back Face */}
             <div 
-              className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center" 
-              style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+              className="relative w-full h-full transition-transform duration-1000 ease-out"
+              style={{ 
+                transformStyle: 'preserve-3d', 
+                transform: `rotateY(${rotation}deg)` 
+              }}
             >
-              <img
-                src={backImage}
-                alt="Face da moeda"
-                className={backImage === '/profile.png' ? "w-full h-full object-cover" : "w-28 h-28 sm:w-32 sm:h-32 object-contain p-2"}
-              />
+              {/* Front Face */}
+              <div className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-transparent" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+                <img
+                  src={frontImage}
+                  alt="Face da moeda"
+                  className="w-full h-full object-contain drop-shadow-md"
+                />
+              </div>
+              
+              {/* Back Face */}
+              <div 
+                className="absolute w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-transparent" 
+                style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+              >
+                <img
+                  src={backImage}
+                  alt="Face da moeda"
+                  className="w-full h-full object-contain drop-shadow-md"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <p className="mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-400">Juh Trufados</p>
-      <p className="mt-4 text-center text-base sm:text-lg text-gray-600 dark:text-gray-300">
-        “Cada bombom é um pedacinho de amor em forma de doce 💖✨”
-      </p>
+        
+        {/* Text Section */}
+        <div className="text-center mb-8 space-y-2 z-10">
+            <h1 className="text-3xl sm:text-4xl font-display font-bold text-primary-dark dark:text-accent drop-shadow-sm">
+                Juh Trufados
+            </h1>
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-200 italic font-medium max-w-xs mx-auto leading-relaxed">
+                “Cada bombom é um pedacinho de amor em forma de doce 💖✨”
+            </p>
+        </div>
 
-      <div className="w-full mt-8">
-        <ShimmerButton href="https://www.instagram.com/mayatrufados/" icon={<Instagram />}>Instagram</ShimmerButton>
-        <ShimmerButton to="/cardapio" icon={<Menu />}>Cardápio</ShimmerButton>
-        <ShimmerButton to="/encomendas" icon={<Mail />}>Encomendas</ShimmerButton>
-        <ShimmerButton onClick={() => setAboutModalOpen(true)} icon={<Info />}>Sobre Mim</ShimmerButton>
+        {/* Buttons Section */}
+        <div className="w-full max-w-xs sm:max-w-sm flex flex-col gap-4 z-10">
+          <ShimmerButton href="https://www.instagram.com/mayatrufados/" icon={<Instagram className="w-5 h-5 sm:w-6 sm:h-6" />}>
+            INSTAGRAM
+          </ShimmerButton>
+          <ShimmerButton to="/cardapio" icon={<Menu className="w-5 h-5 sm:w-6 sm:h-6" />}>
+            NOSSO CARDÁPIO
+          </ShimmerButton>
+          <ShimmerButton to="/encomendas" icon={<Mail className="w-5 h-5 sm:w-6 sm:h-6" />}>
+            FAZER ENCOMENDA
+          </ShimmerButton>
+          <ShimmerButton onClick={() => setAboutModalOpen(true)} icon={<Info className="w-5 h-5 sm:w-6 sm:h-6" />}>
+            SOBRE MIM
+          </ShimmerButton>
+        </div>
       </div>
       
       <AboutModal isOpen={isAboutModalOpen} onClose={() => setAboutModalOpen(false)} />

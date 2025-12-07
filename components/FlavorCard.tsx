@@ -6,7 +6,7 @@ interface FlavorCardProps {
   flavor: Flavor;
 }
 
-export default function FlavorCard({ flavor }: FlavorCardProps): React.ReactNode {
+const FlavorCard: React.FC<FlavorCardProps> = ({ flavor }) => {
   return (
     <Link
       to={`/cardapio/${flavor.id}`}
@@ -26,4 +26,6 @@ export default function FlavorCard({ flavor }: FlavorCardProps): React.ReactNode
       </div>
     </Link>
   );
-}
+};
+
+export default FlavorCard;
