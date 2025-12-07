@@ -50,7 +50,7 @@ const ShimmerButton: React.FC<{
 export default function HomePage(): React.ReactNode {
   const [isAboutModalOpen, setAboutModalOpen] = useState(false);
   const [rotation, setRotation] = useState(0);
-  const images = ['/profile.png', '/logo.png', '/moeda.png'];
+  const images = ['/logo.png', '/moeda.png', '/profile.png'];
 
   useEffect(() => {
     const intervalId = setInterval(() => {
