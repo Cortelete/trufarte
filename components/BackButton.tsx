@@ -7,13 +7,16 @@ const ArrowLeftIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     </svg>
 );
 
+interface BackButtonProps {
+    to?: string;
+}
 
-export default function BackButton(): React.ReactNode {
+export default function BackButton({ to }: BackButtonProps): React.ReactNode {
     const navigate = useNavigate();
 
     return (
         <button
-            onClick={() => navigate(-1)}
+            onClick={() => to ? navigate(to) : navigate(-1)}
             className="group inline-flex items-center mb-6 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-all duration-300"
             aria-label="Voltar para a página anterior"
         >

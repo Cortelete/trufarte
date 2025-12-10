@@ -87,7 +87,7 @@ export default function EncomendasPage(): React.ReactNode {
 
     return (
         <div className="max-w-2xl mx-auto">
-            <BackButton />
+            <BackButton to="/" />
             <h1 className="text-4xl sm:text-5xl font-display text-center mb-4 text-primary dark:text-accent">
                 Encomendas Especiais
             </h1>

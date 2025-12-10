@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AboutModal from '../components/AboutModal';
+import Modal from '../components/Modal';
 import { Instagram, Menu, Mail, Info } from '../components/icons/SocialIcons';
 
 const ShimmerButton: React.FC<{
@@ -49,6 +50,7 @@ const ShimmerButton: React.FC<{
 
 export default function HomePage(): React.ReactNode {
   const [isAboutModalOpen, setAboutModalOpen] = useState(false);
+  const [isMenuModalOpen, setMenuModalOpen] = useState(false);
   const [rotation, setRotation] = useState(0);
   const images = ['/logo.png', '/moeda.png', '/profile.png'];
 
@@ -127,7 +129,7 @@ export default function HomePage(): React.ReactNode {
         {/* Text Section */}
         <div className="text-center mb-8 space-y-2 z-10">
             <h1 className="text-3xl sm:text-4xl font-display font-bold text-primary-dark dark:text-accent drop-shadow-sm">
-                Juh Trufados
+                Mayatrufados
             </h1>
             <p className="text-base sm:text-lg text-gray-700 dark:text-gray-200 italic font-medium max-w-xs mx-auto leading-relaxed">
                 “Cada bombom é um pedacinho de amor em forma de doce 💖✨”
@@ -139,7 +141,7 @@ export default function HomePage(): React.ReactNode {
           <ShimmerButton href="https://www.instagram.com/mayatrufados/" icon={<Instagram className="w-5 h-5 sm:w-6 sm:h-6" />}>
             INSTAGRAM
           </ShimmerButton>
-          <ShimmerButton to="/cardapio" icon={<Menu className="w-5 h-5 sm:w-6 sm:h-6" />}>
+          <ShimmerButton onClick={() => setMenuModalOpen(true)} icon={<Menu className="w-5 h-5 sm:w-6 sm:h-6" />}>
             NOSSO CARDÁPIO
           </ShimmerButton>
           <ShimmerButton to="/encomendas" icon={<Mail className="w-5 h-5 sm:w-6 sm:h-6" />}>
@@ -152,6 +154,19 @@ export default function HomePage(): React.ReactNode {
       </div>
       
       <AboutModal isOpen={isAboutModalOpen} onClose={() => setAboutModalOpen(false)} />
+      
+      <Modal isOpen={isMenuModalOpen} onClose={() => setMenuModalOpen(false)} title="Em Construção 🚧">
+        <div className="text-center text-text-light dark:text-text-dark space-y-4">
+            <p className="text-lg font-medium">Nosso cardápio está sendo preparado com muito carinho!</p>
+            <p className="text-sm">Em breve você poderá ver todas as nossas delícias por aqui. 🍫✨</p>
+            <button
+            onClick={() => setMenuModalOpen(false)}
+            className="mt-4 px-6 py-2 bg-gradient-to-r from-primary to-primary-dark text-white rounded-full hover:opacity-90 transition-opacity font-medium"
+            >
+            Entendi, vou aguardar!
+            </button>
+        </div>
+      </Modal>
     </div>
   );
 }
